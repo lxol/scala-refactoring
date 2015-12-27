@@ -3080,4 +3080,23 @@ class Blubb
     """ -> TaggedAsGlobalRename;
   } prepareAndApplyRefactoring(prepareAndRenameTo("Ups"))
 
+  @Test
+  def testRenamemultilineParenthesis() = new FileSet {
+    """
+    package test
+
+    trait Bug {
+      def /*(*/renameMe/*)*/(
+    ) = 1
+    }
+    """ becomes
+    """
+    package test
+
+    trait Bug {
+      def /*(*/Ups/*)*/(
+    ) = 1
+    }
+    """ -> TaggedAsGlobalRename;
+  } prepareAndApplyRefactoring(prepareAndRenameTo("Ups"))
 }
